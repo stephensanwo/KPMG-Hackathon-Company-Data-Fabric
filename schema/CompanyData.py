@@ -60,5 +60,22 @@ class Company():
 
 
 @dataclass
-class TradingData(Company):
-    pass
+class TradingData():
+    internationalSecNumber: str
+    tradeId: str
+    price: str
+    indexDate: str
+    indexTime: str
+    volume: str
+
+    def trading_data_summary(self):
+        data = {
+            "internationalSecNumber": self.internationalSecNumber,
+            "tradeId": self.tradeId,
+            "price": self.price,
+            "indexDate": self.indexDate,
+            "indexTime": self.indexTime,
+            "volume": self.volume,
+
+        }
+        return data
