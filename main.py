@@ -2,23 +2,24 @@ from models.nse_scrapper import parse_company_base_info
 from schema.CompanyData import Company
 import os
 from dotenv import load_dotenv
-import redis
 from redislite import Redis
+import csv
+
+
+# Init redis storage local caching
+redis_connection = Redis('./tmp/test.db')
 
 
 # Environment
 load_dotenv()
 LISTED_COMPANIES_ENDPOINT = os.environ.get("LISTED_COMPANIES_ENDPOINT")
 
-# Caching
-r = redis.Redis(
-    host='localhost',
-    port=6379)
 
 # Get Company Base information
 res = parse_company_base_info(url=LISTED_COMPANIES_ENDPOINT)
 print(res)
 
+company_base_data = []
 for data in res:
     newCompany = Company(
         id=data["$id"],
@@ -44,4 +45,13 @@ for data in res:
         boardOfDirectors=data["BoardOfDirectors"]
     )
 
-    print(newCompany.company_data_summary())
+    company_base_data.append(newCompany.company_data_summary())
+
+
+fieldNames = list(Company.__dict__['__annotations__'].keys())
+
+
+with open('./tmp/company_base_data.csv', 'w') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
+    writer.writeheader()
+    writer.writerows(company_base_data)
