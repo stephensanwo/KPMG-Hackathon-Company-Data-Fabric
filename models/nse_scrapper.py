@@ -37,14 +37,31 @@ def parse_financial_statement_xml(*args, **kwargs):
     res = req.text
 
     data_dict = xmltodict.parse(res)
-
-    data_list = data_dict['feed']['entry']
-
     result = []
     try:
-        for data in data_list:
+        data_list = data_dict['feed']['entry']
+
+        try:
+            for data in data_list:
+                tmp_data = {}
+                content = data['content']['m:properties']
+                for key, value in content.items():
+                    if key == "d:Type_of_Submission":
+                        tmp_data['type_of_submission'] = value
+
+                    if key == "d:URL":
+                        tmp_data['url'] = value['d:Url']
+                        tmp_data['description'] = value['d:Description']
+
+                    if key == "d:Modified":
+                        tmp_data['modified'] = value['#text']
+
+                result.append(tmp_data)
+
+        except TypeError:
             tmp_data = {}
-            content = data['content']['m:properties']
+            content = data_list['content']['m:properties']
+            print(content['d:URL'])
             for key, value in content.items():
                 if key == "d:Type_of_Submission":
                     tmp_data['type_of_submission'] = value
@@ -56,23 +73,8 @@ def parse_financial_statement_xml(*args, **kwargs):
                 if key == "d:Modified":
                     tmp_data['modified'] = value['#text']
 
-            result.append(tmp_data)
-
-    except TypeError:
-        tmp_data = {}
-        content = data_list['content']['m:properties']
-        print(content['d:URL'])
-        for key, value in content.items():
-            if key == "d:Type_of_Submission":
-                tmp_data['type_of_submission'] = value
-
-            if key == "d:URL":
-                tmp_data['url'] = value['d:Url']
-                tmp_data['description'] = value['d:Description']
-
-            if key == "d:Modified":
-                tmp_data['modified'] = value['#text']
-
-            result.append(tmp_data)
+                result.append(tmp_data)
+    except KeyError:
+        pass
 
     return result

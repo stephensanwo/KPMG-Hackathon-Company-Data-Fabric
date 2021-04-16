@@ -98,3 +98,22 @@ class FinancialStatements():
             "dateModified": self.dateModified
         }
         return data
+
+
+@dataclass
+class CorporateDisclosures():
+    internationalSecNumber: str
+    typeOfSubmission: str
+    description: str
+    url: str
+    dateModified: str
+
+    def corporate_disclosures_summary(self):
+        data = {
+            "internationalSecNumber": self.internationalSecNumber,
+            "typeOfSubmission": self.typeOfSubmission,
+            "description": self.description,
+            "url": self.url,
+            "dateModified": self.dateModified
+        }
+        return data
