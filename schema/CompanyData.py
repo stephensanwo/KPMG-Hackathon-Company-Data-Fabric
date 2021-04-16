@@ -79,3 +79,22 @@ class TradingData():
 
         }
         return data
+
+
+@dataclass
+class FinancialStatements():
+    internationalSecNumber: str
+    typeOfSubmission: str
+    description: str
+    url: str
+    dateModified: str
+
+    def financial_statements_summary(self):
+        data = {
+            "internationalSecNumber": self.internationalSecNumber,
+            "typeOfSubmission": self.typeOfSubmission,
+            "description": self.description,
+            "url": self.url,
+            "dateModified": self.dateModified
+        }
+        return data
