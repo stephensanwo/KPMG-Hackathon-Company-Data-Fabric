@@ -1,0 +1,73 @@
+proxy_list:
+  - proxy: 105.112.8.53
+    port: 3128
+    country: Nigeria
+  - proxy: 160.119.125.25
+    port: 8080
+    country: Nigeria
+  - proxy: 197.210.164.66
+    port: 8080
+    country: Nigeria
+  - proxy: 41.207.251.198
+    port: 8080
+    country: Nigeria
+  - proxy: 154.120.65.198
+    port: 8080
+    country: Nigeria
+  - proxy: 102.67.19.132
+    port: 8080
+    country: Nigeria
+  - proxy: 197.211.51.28
+    port: 3128
+    country: Nigeria
+  - proxy: 41.76.155.134
+    port: 8080
+    country: Nigeria
+  - proxy: 105.112.135.25
+    port: 8080
+    country: Nigeria
+  - proxy: 105.112.134.70
+    port: 8080
+    country: Nigeria
+  - proxy: 105.112.84.137
+    port: 8080
+    country: Nigeria
+  - proxy: 105.112.1.166
+    port: 8080
+    country: Nigeria
+  - proxy: 197.210.141.218
+    port: 8080
+    country: Nigeria
+  - proxy: 41.87.73.182
+    port: 8080
+    country: Nigeria
+  - proxy: 197.210.246.30
+    port: 8080
+    country: Nigeria
+  - proxy: 197.210.107.74
+    port: 8080
+    country: Nigeria
+  - proxy: 197.255.209.34
+    port: 8080
+    country: Nigeria
+  - proxy: 105.112.134.209
+    port: 8080
+    country: Nigeria
+  - proxy: 197.211.35.195
+    port: 8080
+    country: Nigeria
+  - proxy: 197.255.52.214
+    port: 8081
+    country: Nigeria
+  - proxy: 212.100.65.12
+    port: 3129
+    country: Nigeria
+  - proxy: 154.113.19.30
+    port: 8080
+    country: Nigeria
+  - proxy: 154.113.119.50
+    port: 8080
+    country: Nigeria
+  - proxy: 212.100.86.210
+    port: 3129
+    country: Nigeria

@@ -1,0 +1,9 @@
+Sitemap: https://csimarket.com/sitemap_index.xml
+User-agent: *
+Allow: /
+Disallow: /xbrl/
+Disallow: /API/
+Disallow: /css/
+Disallow: /scripts/
+Disallow: /test/
+Disallow: /AutoComplete /

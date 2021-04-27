@@ -21,7 +21,7 @@ def parse_company_base_info(*args, **kwargs):
     return res
 
 
-def parse_financial_statement_xml(*args, **kwargs):
+def nse_xml_parser(*args, **kwargs):
     """
     @Desc: Scrape base url for company data
     @param: Base URL
