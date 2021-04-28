@@ -2,12 +2,7 @@ from models.nse_scrapper import parse_company_base_info, nse_xml_parser
 from schema.CompanyData import Company, TradingData, FinancialStatements, CorporateDisclosures
 import os
 from dotenv import load_dotenv
-from redislite import Redis
 import csv
-
-
-# Init redis storage local caching
-redis_connection = Redis('./tmp/test.db')
 
 
 # Environment

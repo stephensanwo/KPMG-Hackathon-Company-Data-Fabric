@@ -31,6 +31,18 @@ class CompanyList():
                 tmp_data['company_name'] = row["company_name"]
                 data.append(tmp_data)
 
+    @staticmethod
+    def read_sp_company_list() -> list:
+        with open('./tmp/international_company_data/SP_500_base_list.csv', 'r') as csv_file:
+            csv_reader = csv.DictReader(csv_file)
+            data = []
+            for row in csv_reader:
+
+                tmp_data = {}
+                tmp_data['company_code'] = row["\ufeffcompany_code"]
+                tmp_data['company_name'] = row["company_name"]
+                data.append(tmp_data)
+
         return data
 
 
@@ -117,60 +129,250 @@ class CompanyBaseInfo():
 
 
 @dataclass
+class EmployeeData():
+    company_code: str
+    employee_name: str
+    employee_role: str
+
+    def key_employees_summary(self):
+        data = {
+            "company_code": self.company_code,
+            "employee_name": self.employee_name,
+            "employee_role": self.employee_role,
+
+        }
+        return data
+
+    @staticmethod
+    def parse_to_csv(data):
+        fileName = './tmp/international_company_data/key_employees_data.csv'
+        create_header = os.path.exists(fileName)
+        fieldNames = list(EmployeeData.__dict__['__annotations__'].keys())
+        with open(fileName, 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
+
+            if create_header == False:
+                writer.writeheader()
+
+            writer.writerows(data)
+
+
+@dataclass
+class CompanyNews():
+    company_code: str
+    news_title: str
+    news_text: str
+    news_link: str
+
+    def company_news_summary(self):
+        data = {
+            "company_code": self.company_code,
+            "news_title": self.news_title,
+            "news_text": self.news_text,
+            "news_link": self.news_link,
+
+        }
+        return data
+
+    @staticmethod
+    def parse_to_csv(data):
+        fileName = './tmp/international_company_data/company_news_data.csv'
+        create_header = os.path.exists(fileName)
+        fieldNames = list(CompanyNews.__dict__['__annotations__'].keys())
+        with open(fileName, 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
+
+            if create_header == False:
+                writer.writeheader()
+
+            writer.writerows(data)
+
+
+@dataclass
 class TradingData():
-    internationalSecNumber: str
-    tradeId: str
-    price: str
-    indexDate: str
-    indexTime: str
-    volume: str
+    company_code: str
+    trading_date: str
+    current_stock_price: str
+    previous_closing_stock_price: str
+    stock_price_change: str
+    percentage_stock_price_change: str
+    opening_stock_price: str
+    stocks_day_range: str
+    day_trading_volume: str
+    fifty_two_week_range: str
+    analysts_forecast: str
 
     def trading_data_summary(self):
         data = {
-            "internationalSecNumber": self.internationalSecNumber,
-            "tradeId": self.tradeId,
-            "price": self.price,
-            "indexDate": self.indexDate,
-            "indexTime": self.indexTime,
-            "volume": self.volume,
+            "company_code": self.company_code,
+            "trading_date": self.trading_date,
+            "current_stock_price": self.current_stock_price,
+            "previous_closing_stock_price": self.previous_closing_stock_price,
+            "stock_price_change": self.stock_price_change,
+            "percentage_stock_price_change": self.percentage_stock_price_change,
+            "opening_stock_price": self.opening_stock_price,
+            "stocks_day_range": self.stocks_day_range,
+            "day_trading_volume": self.day_trading_volume,
+            "fifty_two_week_range": self.fifty_two_week_range,
+            "analysts_forecast": self.analysts_forecast,
+
 
         }
         return data
+
+    @staticmethod
+    def parse_to_csv(data):
+        fileName = './tmp/international_company_data/company_trading_data.csv'
+        create_header = os.path.exists(fileName)
+        fieldNames = list(TradingData.__dict__['__annotations__'].keys())
+        with open(fileName, 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
+
+            if create_header == False:
+                writer.writeheader()
+
+            writer.writerows(data)
 
 
 @dataclass
-class FinancialStatements():
-    internationalSecNumber: str
-    typeOfSubmission: str
-    description: str
-    url: str
-    dateModified: str
+class FinancialRatios():
+    company_code: str
+    current_ratio: str
+    quick_ratio: str
+    debt_equity: str
+    debt_ebitda: str
+    debt_free_cash_flow: str
+    return_on_equity: str
+    return_on_assets: str
+    return_on_capital: str
+    revenue_per_employee: str
+    profits_per_employee: str
+    inventory_turnover: str
+    asset_turnover: str
+    gross_margin: str
+    operating_margin: str
+    profit_margin: str
 
-    def financial_statements_summary(self):
+    def financial_ratio_summary(self):
         data = {
-            "internationalSecNumber": self.internationalSecNumber,
-            "typeOfSubmission": self.typeOfSubmission,
-            "description": self.description,
-            "url": self.url,
-            "dateModified": self.dateModified
+            "company_code": self.company_code,
+            "current_ratio": self.current_ratio,
+            "quick_ratio": self.quick_ratio,
+            "debt_equity": self.debt_equity,
+            "debt_ebitda": self.debt_ebitda,
+            "debt_free_cash_flow": self.debt_free_cash_flow,
+            "return_on_equity": self.return_on_equity,
+            "return_on_assets": self.return_on_assets,
+            "return_on_capital": self.return_on_capital,
+            "revenue_per_employee": self.revenue_per_employee,
+            "profits_per_employee": self.profits_per_employee,
+            "asset_turnover": self.asset_turnover,
+            "inventory_turnover": self.inventory_turnover,
+            "gross_margin": self.gross_margin,
+            "operating_margin": self.operating_margin,
+            "profit_margin": self.profit_margin
         }
         return data
+
+    @staticmethod
+    def parse_to_csv(data):
+        fileName = './tmp/international_company_data/company_financial_ratios.csv'
+        create_header = os.path.exists(fileName)
+        fieldNames = list(FinancialRatios.__dict__['__annotations__'].keys())
+        with open(fileName, 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
+
+            if create_header == False:
+                writer.writeheader()
+
+            writer.writerows(data)
 
 
 @dataclass
-class CorporateDisclosures():
-    internationalSecNumber: str
-    typeOfSubmission: str
-    description: str
-    url: str
-    dateModified: str
+class FinancialStatement():
+    company_code: str
+    revenue: str
+    gross_profit: str
+    operating_income: str
+    pre_tax_income: str
+    net_income: str
+    ebitda: str
+    ebit: str
+    eps: str
+    cash_equivalents: str
+    total_debt: str
+    net_cash: str
+    book_value: str
+    working_capital: str
+    operating_cashflow: str
+    capital_expenditures: str
+    free_cash_flow: str
+    income_tax: str
 
-    def corporate_disclosures_summary(self):
+    def financial_data_summary(self):
         data = {
-            "internationalSecNumber": self.internationalSecNumber,
-            "typeOfSubmission": self.typeOfSubmission,
-            "description": self.description,
-            "url": self.url,
-            "dateModified": self.dateModified
+            "company_code": self.company_code,
+            "revenue": self.revenue,
+            "gross_profit": self.gross_profit,
+            "operating_income": self.operating_income,
+            "pre_tax_income": self.pre_tax_income,
+            "net_income": self.net_income,
+            "ebitda": self.ebitda,
+            "ebit": self.ebit,
+            "eps": self.eps,
+            "cash_equivalents": self.cash_equivalents,
+            "total_debt": self.total_debt,
+            "net_cash": self.net_cash,
+            "book_value": self.book_value,
+            "working_capital": self.working_capital,
+            "operating_cashflow": self.operating_cashflow,
+            "capital_expenditures": self.capital_expenditures,
+            "free_cash_flow": self.free_cash_flow,
+            "income_tax": self.income_tax
         }
         return data
+
+    @staticmethod
+    def parse_to_csv(data):
+        fileName = './tmp/international_company_data/company_financial_statements.csv'
+        create_header = os.path.exists(fileName)
+        fieldNames = list(FinancialStatement.__dict__[
+                          '__annotations__'].keys())
+        with open(fileName, 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
+
+            if create_header == False:
+                writer.writeheader()
+
+            writer.writerows(data)
+
+
+@dataclass
+class SuppliersCustomers():
+    company_code: str
+    name: str
+    code: str
+    category: str
+
+    def sc_summary(self):
+        data = {
+            "company_code": self.company_code,
+            "name": self.name,
+            "code": self.code,
+            "category": self.category
+        }
+        return data
+
+    @staticmethod
+    def parse_to_csv(data):
+        fileName = './tmp/international_company_data/company_suppliers_and_customers.csv'
+        create_header = os.path.exists(fileName)
+        fieldNames = list(SuppliersCustomers.__dict__[
+                          '__annotations__'].keys())
+        with open(fileName, 'a') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=fieldNames)
+
+            if create_header == False:
+                writer.writeheader()
+
+            writer.writerows(data)
