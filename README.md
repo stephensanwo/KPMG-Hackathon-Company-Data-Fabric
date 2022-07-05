@@ -2,7 +2,7 @@
 
 ### Description
 
-A Data ingestion pipeline for company centric data from ultiple sources into KPMG signals repository
+A Data ingestion pipeline for company centric data from multiple sources into KPMG signals repository
 
 6482 Companies base information available
 
@@ -17,11 +17,6 @@ Granular data available for S&P 500 companies
 - Key Employees Data
 - Customers and Suppliers Data
 
-Two data sources exists:
-
-- Base Data - This data does not change often
-- Podcast
-- Audiobook
 
 ### Built with:
 
